@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+  <link rel="stylesheet" href="../css/user.css" >
+  <script src="../js/jquery-1.12.1.min.js"></script>
+	
+</head>
+<body>
+	<div id="container">
+
+	<section class="ResponsiveContainer__ComponentWrapper-sc-1vg0xjd-0 coRemr">
+		<!-- bodytext_area -->
+	
+           
+             <div class="css-1dbjc4n" id="로고와 설명" data-testid="로고와 설명" style="margin-right: 10px; margin-left: 10px;">
+				<div class="LogoWithDescription__Text-sc-1b4bm6c-1 gXkdNe css-1563yu1" dir="auto" style="font-size: 14px;">간편하게 가입하고</div>
+				<div class="LogoWithDescription__Text-sc-1b4bm6c-1 cLsMZb css-1563yu1" dir="auto" style="font-size: 15px;">다양한 서비스를 이용하세요.</div>
+			</div>
+			<div class="css-1dbjc4n">
+			<form action="joinForm" class="joinForm" method="post">
+				<table>
+					
+					<tr class="css-1dbjc4n r-18u37iz">
+						<td class="css-1dbjc4n r-1mlwlqe r-16y2uox r-1wbh5a2 r-kzbkwu r-qi0n3 r-c9eks5">
+          
+                            
+                                <input type="text" class="email_input" id="user_email" name="user_email" placeholder="이메일"  style="width:280px; height: 30px;"/>
+								<p class="err_m">[[${valid_user_email}]]</p>
+								<span class="email_input_re_1">사용 가능한 이메일입니다.</span>
+								<span class="email_input_re_2">이메일이 이미 존재합니다.</span>
+                            
+							</td>
+						 </tr>
+						<tr class="css-1dbjc4n r-18u37iz">
+							<td class="css-1dbjc4n r-1mlwlqe r-16y2uox r-1wbh5a2 r-kzbkwu r-qi0n3 r-c9eks5">
+							
+								<input type="text" class="id_input" id="user_id" name="user_id" placeholder="아이디를 입력해주세요"  style="width:280px; height: 30px;"/>
+								<p class="err_m">[[${valid_user_id}]]</p>
+								<span class="id_input_re_1">사용 가능한 아이디입니다.</span>
+								<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
+							
+								</td>
+						 </tr>
+						 <tr class="css-1dbjc4n r-18u37iz">
+							<td class="css-1dbjc4n r-1mlwlqe r-16y2uox r-1wbh5a2 r-kzbkwu r-qi0n3 r-c9eks5">
+				
+							
+								<input type="password" class="pw_input" id="user_pw" name="user_pw" placeholder="비밀번호를 입력해주세요"  style="width:280px; height: 30px;"/>
+								<p class="err_m">[[${valid_user_pw}]]</p>
+								
+							</td>
+						 </tr>
+						
+						 <tr class="css-1dbjc4n r-18u37iz">
+							<td class="css-1dbjc4n r-1mlwlqe r-16y2uox r-1wbh5a2 r-kzbkwu r-qi0n3 r-c9eks5">
+					
+							
+								<input type="password" class="pw_input2" id="user_pw_ck" name="user_pw_ck" placeholder="비밀번호를 다시 한번 입력해주세요"  style="width:280px; height: 30px;"/>
+								<p class="err_m">[[${valid_user_pw}]]</p>
+								</td>
+						 </tr>
+				
+						 <tr class="css-1dbjc4n r-18u37iz">
+							<td class="css-1dbjc4n r-1mlwlqe r-16y2uox r-1wbh5a2 r-kzbkwu r-qi0n3 r-c9eks5">
+					
+							
+								<input type="tel" class="phone_input" id="user_phone" name="user_phone" placeholder="휴대폰”-”없이 숫자만 입력하세요"  style="width:280px; height: 30px;"/>
+								<p class="err_m">[[${valid_user_phone}]]</p>
+								
+							
+							
+								</td>
+						 </tr>
+						<!--
+						<li class="clear">
+                            <span class="tit_lbl">SNS 활용동의</span>
+							<div class="app_content checkbox_area">
+								<input type="radio" class="css-checkbox" name="####" id="agree_1" checked><label for="agree_1">동의함(필수)</label>
+								<input type="radio" class="css-checkbox" name="####" id="agree_2" ><label for="agree_2">동의하지않음</label>
+							</div>
+						</li>
+						-->
+						</div>
+						</table>
+		
+						<div class="FixedButton__ResponsiveButton-s6ckrb-0 bVaiha">
+                            <button type="submit" style="width: 295px; height: 39px; align-items:center;">회원가입</button>
+                        
+						</div>
+			
+					<!--
+                    <div class="findInfo">
+                        <ul>
+                          <li class="left">
+                            <a href="#">아이디찾기</a>
+                            <a href="#">비밀번호찾기</a>
+                          </li>
+                          <li class="right">
+                            <a href="#">로그인</a>
+                          </li>
+                        </ul>
+                      </div>
+                      -->
+	
+			</form>
+			</div>
+		</div>
+		</div>
+	</section>
+
+	</div>
+	<script type="text/javascript">
+		
+		//아이디 중복검사
+		$('.id_input').on("propertychange change keyup paste input", function(){
+
+			//console.log("keyup 테스트");	
+			
+			var user_id = $('.id_input').val();
+			var data = {user_id:user_id} // '컨트롤에 넘길 데이터 이름' : '데이터(.id_input에 입력되는 값)'
+			
+			$.ajax({
+				type :"post",
+				url: "/user/idCheck",
+				data:data,
+				success: function(result){
+					//console.log("성공여부" + result);
+					if(result != 'fail'){
+						$('.id_input_re_1').css("display","inline-block");
+						$('.id_input_re_2').css("display","none");
+					}else{
+						$('.id_input_re_2').css("display","inline-block");
+						$('.id_input_re_1').css("display","none");
+					}
+					
+				}
+			});
+		});
+		
+		//이메일 중복검사
+		$('.email_input').on("propertychange change keyup paste input", function(){
+			var user_email = $('.email_input').val(); //.eamil_input에 입력되는 값
+			var data = {user_email:user_email} // 
+			
+			$.ajax({
+				type:"post",
+				url:"/user/emailCheck",
+				data : data,
+				success: function(result){
+					if(result != 'fail'){
+						$('.email_input_re_1').css("display","inline-block");
+						$('.email_input_re_2').css("display","none");
+					}else{
+						$('.email_input_re_2').css("display","inline-block");
+						$('.email_input_re_1').css("display","none");	
+					}
+				}
+			});
+		});
+		
+	
+
+	
+	
+	
+	</script>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,160 @@
+@charset "UTF-8";
+	/* 중복아이디 존재하지 않는경우 */
+	.id_input_re_1{
+		color : green;
+		display : none;
+		font-size: 3px;
+	}
+	/* 중복아이디 존재하는 경우 */
+	.id_input_re_2{
+		color : red;
+		display : none;
+		font-size: 3px;
+	}
+	
+	/* 중복이메일 존재하지 않는경우 */
+	.email_input_re_1{
+		color : green;
+		display : none;
+		font-size: 3px;
+	}
+	/* 중복이메일 존재하는 경우 */
+	.email_input_re_2{
+		color : red;
+		display : none;
+		font-size: 3px;
+	}
+	
+
+	/* 중복아이디 존재하는 경우 */
+	.id_login_re_1{
+		color : red;
+		font-size: 3px;
+		margin-top: 10px;
+	}
+	
+	/****************************************/
+
+	
+	
+.coRemr {
+
+	margin-top: 200px;
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+    min-height: 455px;
+    max-height: 543px;
+    position: relative;
+	display: block;
+	
+}
+
+
+
+.css-1dbjc4n {
+    /* -webkit-box-align: stretch; */
+    /* -webkit-box-direction: normal; */
+    /* -webkit-box-orient: vertical; */
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    /* flex-shrink: 0; */
+    /* position: relative; */
+    z-index: 0;
+    align-items: center;
+  
+    margin:0;
+}
+
+
+.lhglTA {
+    display: flex;
+    flex-flow: column wrap;
+    background-color: rgb(255, 255, 255);
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 30px;	
+    
+    
+}
+
+
+
+
+.gXkdNe {
+    margin-top: 0px;
+    font-size: 22px;
+    font-family: SpoqaHanSans;
+    font-weight: 300;
+    /* text-align: center; */
+    /* color: rgb(34, 34, 34); */
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+   
+}
+
+
+.cLsMZb {
+    margin-top: 0px;
+    font-size: 22px;
+    font-family: SpoqaHanSans;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(34, 34, 34);
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+
+     margin-bottom: 40px;
+}
+
+.r-18u37iz {
+
+    width: 100%;
+    
+
+}
+
+.r-18u37iz input {
+	padding: 3px;
+	
+	
+}
+.bVaiha {
+	display: flex;
+
+	flex-direction: column;
+	margin-top: 30px;
+	
+}
+
+.bVaiha button {
+	margin-bottom: 5px;
+	background-color:#4e73df;
+	color:white;
+	border: none;
+	height: 35px;
+	border-radius:2px ;
+	align-items: center;
+	
+}
+
+.bVaiha button a {
+	color:white;
+	text-decoration: none;
+}
+
+.bVaiha button:hover {
+	background-color:rgb(60, 94, 174);
+}
+
+.err_m{
+	color: red;
+	font-size: 3px;
+	padding: 0;
+	
+}
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+ <link rel="stylesheet" href="../css/e.css" >
+</head>
+<body>
+	<div class="login">
+		<h2>LOG IN</h2>
+		<div class="adminLogin">
+			<a th:href="@{/admin/adminLogin}">어드민 로그인</a>
+		</div>
+		<div class="agentLogin">
+			<a th:href="@{/agent/agentLogin}">관리자 로그인</a>
+		</div>
+		<div class="userLogin">
+			<a th:href="@{/user/login}">회원 로그인</a>
+		</div>
+		
+	</div>
+</body>
+</html>

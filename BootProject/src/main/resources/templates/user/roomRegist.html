@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{./include/layout :: setContent( ~{:: .card}) }">
+<div class="card shadow md-4">
+	<div class="card-header py-3">
+		방 내놓기
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-12">
+			    <form name="registForm" action="registForm" method="post" enctype="multipart/form-data">
+					<div class="full_collum collum">
+                            <ul>
+                                <li class="collum_tit">
+                                    <ul>
+										<table cellpadding="0" cellspacing="0" class="board_basic_view" width="100%;">
+											<div class="card-header py-3">위치 정보</div>
+										        <tr>
+										            <th>주소</th>
+										            <td><input type="text" id="r_address" name="r_address" readonly /></td>
+										        	<!--<td><button type="button">위치 확인하기</button></td>-->
+										        </tr>
+										        <tr>
+										            <th>위치</th> <!-- 지도 api -->
+										            <td><input type="text" name="r_map" /></td>
+										        </tr>
+										        <tr>
+										            <th>상세 주소</th>
+										            <td><input type="text" name="r_address_detail" /></td>
+										        </tr>
+								        </table>
+							        </ul>
+                                </li>
+                            </ul>
+                    </div>
+			        <div class="full_collum collum">
+                            <ul>
+                                <li class="collum_tit">
+                                    <ul>
+                                        <!--<li>-->
+                                            <table cellpadding="0" cellspacing="0" class="board_basic_view" width="100%;">
+                                               <div class="card-header py-3">사진 등록</div>
+                                                <tr> 
+                                                    <th>메인 이미지</th>
+                                                    <td colspan="3">
+                                                        <!--업로드 폼-->   
+                                                        <div class="filebox preview-image">
+                                                            <div style="color: red;">*이미지는 최초 등록 후 추가가 불가능 합니다</div>
+                                                            <!--1 -->
+                                                            <div class="left">
+                                                                <!--<span>메인이미지</span>-->
+                                                                <label class="upload-display" for="main_file" style="border: 1px solid #777;">
+                                                                    <span class="upload-thumb-wrap">
+                                                                        <img class="upload-thumb" src="../img/plus_btn.png" >
+                                                                    </span>
+                                                                </label>
+                                                                <input type="hidden" class="upload-name" value="파일선택" disabled="disabled">
+                                                                <input type="file" name="file" id="main_file" class="upload-hidden">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr> 
+                                                    <th>추가 이미지</th>
+                                                    <td colspan="3">
+                                                    <div class="filebox preview-image">
+														<div style="color: red;">*이미지는 최소 5장에서 최대 10장까지 등록할 수 있습니다</div>
+                                                        <!--1 -->
+                                                        <div class="left">
+                                                            <!--<span>추가이미지</span>-->
+                                                            <label class="upload-display" for="a_file" style="border: 1px solid #777;">
+                                                                <span class="upload-thumb-wrap">
+                                                                    <img class="upload-thumb" src="../img/plus_btn.png">
+                                                                </span>
+                                                            </label>
+                                                            <input class="upload-name" value="파일선택" disabled="disabled" style="margin-bottom: 20px;">
+                                                            <input type="file" name="file" id="a_file" class="upload-hidden">
+                                                        </div>
+                                                        <div class="left">
+                                                            <!--<span>추가이미지</span>-->
+                                                            <label class="upload-display" for="b_file" style="border: 1px solid #777;">
+                                                                <span class="upload-thumb-wrap">
+                                                                    <img class="upload-thumb" src="../img/plus_btn.png">
+                                                                </span>
+                                                            </label>
+                                                            <input class="upload-name" value="파일선택" disabled="disabled">
+                                                            <input type="file" name="file" id="b_file" class="upload-hidden">
+                                                        </div>
+                                                        <div class="left">
+                                                            <!--<span>추가이미지</span>-->
+                                                            <label class="upload-display" for="c_file" style="border: 1px solid #777;">
+                                                                <span class="upload-thumb-wrap">
+                                                                    <img class="upload-thumb" src="../img/plus_btn.png">
+                                                                </span>
+                                                            </label>
+                                                            <input class="upload-name" value="파일선택" disabled="disabled">
+                                                            <input type="file" name="file" id="c_file" class="upload-hidden">
+                                                        </div>
+                                                        <div class="left">
+                                                            <!--<span>추가이미지</span>-->
+                                                            <label class="upload-display" for="d_file" style="border: 1px solid #777;">
+                                                                <span class="upload-thumb-wrap">
+                                                                    <img class="upload-thumb" src="../img/plus_btn.png">
+                                                                </span>
+                                                            </label>
+                                                            <input class="upload-name" value="파일선택" disabled="disabled">
+                                                            <input type="file" name="file" id="d_file" class="upload-hidden">
+                                                        </div>
+                                                        <div class="left">
+                                                            <!--<span>추가이미지</span>-->
+                                                            <label class="upload-display" for="e_file" style="border: 1px solid #777;">
+                                                                <span class="upload-thumb-wrap">
+                                                                    <img class="upload-thumb" src="../img/plus_btn.png">
+                                                                </span>
+                                                            </label>
+                                                            <input class="upload-name" value="파일선택" disabled="disabled">
+                                                            <input type="file" name="file" id="e_file" class="upload-hidden">
+                                                        </div>
+                                                        <br/>
+                                                        <div class="left">
+                                                            <!--<span>추가이미지</span>-->
+                                                            <label class="upload-display" for="f_file" style="border: 1px solid #777;">
+                                                                <span class="upload-thumb-wrap">
+                                                                    <img class="upload-thumb" src="../img/plus_btn.png">
+                                                                </span>
+                                                            </label>
+                                                            <input class="upload-name" value="파일선택" disabled="disabled">
+                                                            <input type="file" name="file" id="f_file" class="upload-hidden">
+                                                        </div>
+                                                        <div class="left">
+                                                            <!--<span>추가이미지</span>-->
+                                                            <label class="upload-display" for="g_file" style="border: 1px solid #777;">
+                                                                <span class="upload-thumb-wrap">
+                                                                    <img class="upload-thumb" src="../img/plus_btn.png">
+                                                                </span>
+                                                            </label>
+                                                            <input class="upload-name" value="파일선택" disabled="disabled">
+                                                            <input type="file" name="file" id="g_file" class="upload-hidden">
+                                                        </div>
+                                                        <div class="left">
+                                                            <!--<span>추가이미지</span>-->
+                                                            <label class="upload-display" for="h_file" style="border: 1px solid #777;">
+                                                                <span class="upload-thumb-wrap">
+                                                                    <img class="upload-thumb" src="../img/plus_btn.png">
+                                                                </span>
+                                                            </label>
+                                                            <input class="upload-name" value="파일선택" disabled="disabled">
+                                                            <input type="file" name="file" id="h_file" class="upload-hidden">
+                                                        </div>
+                                                        <div class="left">
+                                                            <!--<span>추가이미지</span>-->
+                                                            <label class="upload-display" for="i_file" style="border: 1px solid #777;">
+                                                                <span class="upload-thumb-wrap">
+                                                                    <img class="upload-thumb" src="../img/plus_btn.png">
+                                                                </span>
+                                                            </label>
+                                                            <input class="upload-name" value="파일선택" disabled="disabled">
+                                                            <input type="file" name="file" id="i_file" class="upload-hidden">
+                                                        </div>
+                                                        <div class="left">
+                                                            <!--<span>추가이미지</span>-->
+                                                            <label class="upload-display" for="j_file" style="border: 1px solid #777;">
+                                                                <span class="upload-thumb-wrap">
+                                                                    <img class="upload-thumb" src="../img/plus_btn.png">
+                                                                </span>
+                                                            </label>
+                                                            <input class="upload-name" value="파일선택" disabled="disabled">
+                                                            <input type="file" name="file" id="j_file" class="upload-hidden">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    </td>
+                                                </tr>
+                                                
+
+                                                
+                                            </table>
+                                            
+                                        <!--</li>-->
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+			        
+			        <div class="full_collum collum">
+                            <ul>
+                                <li class="collum_tit">
+                                    <ul>
+                                        <!--<li>-->
+                                            <table cellpadding="0" cellspacing="0" class="board_basic_view" width="100%;">
+												<div class="card-header py-3">상세 정보</div>
+                                                <tr>
+                                                    <th>공고종료일</th>
+                                                    <td colspan="5">
+                                                        <input type="text" class="datepicker" name="room_enddate" readonly placeholder="날짜선택" required pattern="\d{4}-\d{2}-\d{2}">
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>중개사</th>
+                                                    <td><input type="text" class="inputw150" name="room_writer" value="admin" readonly></td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th>보증금</th>
+                                                    <td colspan="3"><input type="text" class="inputw150" name="deposit" value="" placeholder="3000" required pattern="\d*">만원</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>월세</th>
+                                                    <td colspan="3"><input type="text" class="inputw150" name="rent" value="" placeholder="30" required pattern="\d*">만원</td>
+                                                </tr>
+												<tr>
+													<th>방구조</th>
+													<td colspan="3">
+														<select class="inputw150" id="key" name="structure">
+															<option value="원룸(오픈형)">원룸(오픈형)</option>
+															<option value="원룸(분리형)">원룸(분리형)</option>
+															<option value="복층형">복층형</option>
+															<option value="전체">전체</option>
+														</select>
+													</td>
+												</tr>
+												<tr>
+                                                    <th>관리비</th>
+                                                    <td colspan="3"><input type="text" class="inputw150" name="maintenanceCost" value="" placeholder="10" required pattern="\d*">만원</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>크기</th>
+                                                    <td colspan="3">
+														전용면적 : <input type="text" class="inputw150" id="size" name="size" onkeyup="sqftCal()" placeholder="10" required pattern="\d*">
+														㎡= <input type="text" class="inputw150" id="room_sqft" name="room_sqft" value="" placeholder="10" required pattern="\d*" readonly>P
+														</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th>층수</th>
+                                                    <td colspan="3">
+														건물 층 수 : 
+														<select class="inputw150" name="room_floors">
+															<option value="1">1층</option>
+															<option value="2">2층</option>
+															<option value="3">3층</option>
+															<option value="4">4층</option>
+														</select>
+														  /  해당 층 : 
+														<select class="inputw150" name="room_floor">
+															<option value="1">1층</option>
+															<option value="2">2층</option>
+															<option value="3">3층</option>
+															<option value="4">4층</option>
+														</select>
+													</td>
+                                                </tr>
+                                                
+												<tr>
+													<th>방향</th>
+													<td colspan="3">
+														<select class="inputw150" name="direction">
+															<option value="동향">동향</option>
+															<option value="남동향">남동향</option>
+															<option value="서동향">서동향</option>
+															<option value="남향">남향</option>
+														</select>
+													</td>
+												</tr>
+												
+												<tr>
+                                                    <th>옵션</th>
+                                                    <td colspan="3">
+                                                        <div class="uInputCheckBox">
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="냉장고" >
+                                                                    <span class="text">냉장고</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="TV" >
+                                                                    <span class="text">TV</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="인덕션" >
+                                                                    <span class="text">인덕션</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="에어컨" >
+                                                                    <span class="text">에어컨</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="책상" >
+                                                                    <span class="text">책상</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="침대" >
+                                                                    <span class="text">침대</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="세탁기" >
+                                                                    <span class="text">세탁기</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="가스레인지" >
+                                                                    <span class="text">가스레인지</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="전자레인지" >
+                                                                    <span class="text">전자레인지</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="책장" >
+                                                                    <span class="text">책장</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="옷장" >
+                                                                    <span class="text">옷장</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="신발장" >
+                                                                    <span class="text">신발장</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputCheck">
+                                                                <label>
+                                                                    <input type="checkbox"  name="room_opt" value="싱크대" >
+                                                                    <span class="text">싱크대</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+												
+												<tr>
+                                                    <th>전세 대출</th>
+                                                    <td colspan="3">
+                                                        <div class="uInputRadioBox">
+                                                            <div class="uInputRadio">
+                                                                <label>
+                                                                    <input type="radio"  name="loan" value="가능" checked="checked">
+                                                                    <span class="text">가능</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputRadio">
+                                                                <label>
+                                                                    <input type="radio" name="loan" value="불가능" >
+                                                                    <span class="text">불가능</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputRadio">
+                                                                <label>
+                                                                    <input type="radio" name="loan" value="확인필요" >
+                                                                    <span class="text">확인필요</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+												
+												<th>반려 동물</th>
+                                                    <td colspan="3">
+                                                        <div class="uInputRadioBox">
+                                                            <div class="uInputRadio">
+                                                                <label>
+                                                                    <input type="radio"  name="pet" value="가능" checked="checked">
+                                                                    <span class="text">가능</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputRadio">
+                                                                <label>
+                                                                    <input type="radio" name="pet" value="불가능" >
+                                                                    <span class="text">불가능</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputRadio">
+                                                                <label>
+                                                                    <input type="radio" name="pet" value="고양이만" >
+                                                                    <span class="text">고양이만</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputRadio">
+                                                                <label>
+                                                                    <input type="radio" name="pet" value="확인필요" >
+                                                                    <span class="text">확인필요</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+												
+												<tr>
+                                                    <th>주차</th>
+                                                    <td colspan="3">
+                                                        <div class="uInputRadioBox">
+                                                            <div class="uInputRadio">
+                                                                <label>
+                                                                    <input type="radio"  name="parking" value="가능" checked="checked">
+                                                                    <span class="text">가능</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputRadio">
+                                                                <label>
+                                                                    <input type="radio" name="parking" value="없음" >
+                                                                    <span class="text">없음</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th>엘리베이터</th>
+                                                    <td colspan="3">
+                                                        <div class="uInputRadioBox">
+                                                            <div class="uInputRadio">
+                                                                <label>
+                                                                    <input type="radio"  name="elevator" value="있음" checked="checked">
+                                                                    <span class="text">있음</span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="uInputRadio">
+                                                                <label>
+                                                                    <input type="radio" name="elevator" value="없음" >
+                                                                    <span class="text">없음</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                
+												<tr>
+                                                    <th>입주가능일</th>
+                                                    <td colspan="5">
+                                                        <input type="text" class="datepicker" name="moveDate" readonly placeholder="날짜선택" required pattern="\d{4}-\d{2}-\d{2}">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th>제목</th>
+                                                    <td colspan="5"><input type="text" class="inputw99p" name="title" required></td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th>상세 설명</th>
+                                                    <td colspan="5">
+                                                        <div><textarea class="inputw99p" name="content" style="height: 200px;"></textarea>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>메시지</th>
+                                                    <td colspan="5">
+                                                        <div><textarea class="inputw99p" name="message" style="height: 200px;"></textarea>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                
+                                            </table>
+                                            <div class="btn_area">
+                                                <input type="submit" class="save" value="등록">
+                                            	<input type="button" class="delete" value="목록">
+                                                <!-- 
+                                                <a href="#" class="save">등록</a>
+                                                <a href="#" class="delete">목록</a>
+                                                <a href="#" class="revise mglr13">삭제</a> 
+                                                -->
+                                            </div>
+                                        <!--</li>-->
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+			    </form>
+		    </div>
+    	</div>
+    </div>
+</div>
+</th:block>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+window.onload = function(){
+    document.getElementById("r_address").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.getElementById("r_address").value = data.address; // 주소 넣기
+                document.querySelector("input[name=r_address_detail]").focus(); //상세입력 포커싱
+            }
+        }).open();
+    });
+}
+
+function sqftCal()
+	{
+	  var size = document.getElementById("size").value;
+	  var sqft = size * 0.3025;
+	  document.getElementById('room_sqft').value = sqft.toFixed(2);
+	}
+</script>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script th:if="${msg}">
+    alert("[[${msg}]]");
+</script>
+<th:block th:replace="~{./include/layout :: setContent( ~{:: .card}) }">
+<div class="card shadow md-4">
+<!-- <div class="container"> -->
+	<div class="card-header py-3">
+		방 등록 목록
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-12">
+				<form action="roomList" name="actionForm" method="post">
+					<input type="hidden" name="perPageNum" value="${pageObject.perPageNum }">
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+						  <select class="form-control" id="key" name="key">
+						    <option value="t">제목</option>
+						    <option value="c">내용</option>
+						    <option value="w">작성자</option>
+						    <option value="tc">제목/내용</option>
+						    <option value="tw">제목/작성자</option>
+						    <option value="cw">내용/작성자</option>
+						    <option value="tcw">모두</option>
+						  </select>
+					  </div>
+					  <input type="text" class="form-control" placeholder="Search" id="word" name="word">
+					  <div class="input-group-append">
+					    <button class="btn btn-success" type="submit">검색</button>
+					  </div>
+					</div>
+				</form>
+				<h6 class="cnt">등록한 방 : 개</h6>
+			</div>
+		</div>
+		<form action="####" method="post">
+		<table cellpadding="0" cellspacing="0" class="col_14" height="100%" width="100%;">
+			<tr>
+				<th></th>
+				<th>목록</th>
+				<th></th>
+			</tr>
+			<tr th:each="vo, status : ${list}">
+				<td height="0">
+					<div><img class="roomImg" src="" style="max-width: 100%; max-height: 100%;"></div>
+				</td>
+				<td>
+					<input type="hidden" id="r_writer" th:value="${vo.room_writer}">
+					<p>공실번호 : [[${vo.room_id}]]</p>
+					<h3>[[${vo.r_address}]]</h3>
+					<span>[[${vo.deposit}]] /</span>
+					<span>[[${vo.rent}]]</span>
+				</td>
+				<td>
+					<div class="btn_area">
+						<!--<a href="roomUpdate" class="save" >수정</a>
+						<a href="roomDelete" class="save" >삭제</a>-->
+						<a href="#" class="save" id="modifyBtn">수정</a>
+                        <a href="#" class="delete" id="deleteBtn">삭제</a>
+					</div>
+				</td>
+			</tr>
+									
+											
+		</table>
+		</form>
+		<!--<th:block th:replace="~{./include/page :: pageNation( ${pageVO} )}"></th:block>-->
+	
+	</div>
+</div>
+<!--var sessionValue = "";
+		$.ajax({
+    url: "get-session-value", // 서버의 세션 값을 가져올 URL
+    type: 'GET',
+    success: function(data) {
+		//console.log(data.a_name)
+        sessionValue = data.a_name;
+        sessionStorage.setItem('sessionValue', sessionValue); // 세션 스토리지에 저장
+        //console.log(sessionStorage.getItem('sessionValue')); // 클라이언트 측에서 세션 값을 사용
+    }
+});-->
+</th:block>
+<script th:inline="javascript">
+	
+	//수정기능
+	let modifyBtn = document.getElementById("modifyBtn");
+	modifyBtn.onclick = () => {
+		//이벤트 a에 걸려있음
+		event.preventDefault();
+		
+		document.actionForm.action = "roomUpdate"; //action변경
+		document.actionForm.submit(); //서브밋
+	}
+	
+	//삭제기능
+	let deleteBtn = document.getElementById("deleteBtn");
+	deleteBtn.onclick = () => {
+		event.preventDefault();
+		
+		document.actionForm.action = "deleteForm"; //action변경
+		document.actionForm.submit(); //서브밋
+	}
+	
+	
+	window.onload = function () {
+		var writer = document.getElementById("r_writer").value;
+		$.ajax({
+			url: "getAjaxImg",
+			type: "post",
+			contentType: "application/json", //보낼 데이터 형식
+			data : JSON.stringify( {room_writer: writer} ),
+			success : function(data) {
+				console.log(data);
+				
+				
+				var imgElements = $(".roomImg"); // 모든 이미지 요소들을 선택
+
+	            for(var i = 0; i < data.length && i < imgElements.length; i++) {
+	                var imgElement = imgElements[i];
+	                var imgSrc = "display?filename=" + data[i].filename + "&filepath=" + data[i].filepath + "&uuid=" + data[i].uuid;
+	                $(imgElement).attr("src", imgSrc);
+	            }
+				
+				$(".cnt").html("등록한 방 : " + data.length + "개");
+				
+                
+			},
+			error : function(status, error) {
+				console.log(status)
+			}
+			
+		})
+		
+	}
+</script>
+</html>

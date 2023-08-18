@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.example.project.agent.service.UserMapper">
+ 
+   
+  <insert id="join" parameterType="UserVO">
+        insert into user (
+            user_email,
+            user_id,
+            user_pw,
+            user_phone
+        ) values (
+            #{user_email},
+            #{user_id},
+            #{user_pw},
+            #{user_phone}
+        )
+    </insert>
+  
+	 
+	 <select id="login" resultType="UserVO">
+	     select *
+	      from user
+	      where user_id = #{user_id}
+	      and user_pw = #{user_pw}
+	 </select>
+  
+      <select id="idCheck" parameterType="String" resultType="int">
+		select count(*) From user where user_id=#{user_id}
+	  </select>
+	
+		<select id ="emailCheck" parameterType="String" resultType="int">
+			select count(*) from user where user_email = #{user_email}
+		</select>
+		
+		<select id="login_id" parameterType="String" resultType="int">
+			select count(*) From user where user_id=#{user_id}
+		</select>
+		
+		<select id="login_pw" parameterType="String" resultType="int">
+			select count(*) From user where user_pw=#{user_pw}
+		</select>
+		
+		<select id="getUser_id" resultType="UserVO">
+			select * from user where user_id = #{user_id}
+		</select>
+		
+		
+		
+		
+		  <select id="getList" resultType="RoomVO">
+				select * from room
+				where r_agree = #{yn}
+  			</select>
+		
+		
+	<select id="getRoomData" resultType="roomVO">
+		select * 
+		from room
+		where room_id = #{room_id}
+	</select>
+
+		
+		
+		
+		
+		
+  </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

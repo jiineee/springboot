@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{./include/userlayout :: setContent( ~{:: .card}) }">
+	
+<div class="card shadow md-4" style="width: 600px; ">
+
+<section class="ResponsiveContainer__ComponentWrapper-sc-1vg0xjd-0 coRemr" style="transform: translateY(-80px);">
+	<div class="top">
+	<div class="css-1dbjc4n r-150rngu" style="inset: 0px 0px 50px; flex-direction: column; flex-grow: 1; flex-shrink: 1; overflow: hidden auto; position: absolute; transform: translateZ(0px); -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-box-flex: 1;">
+		<div class="css-1dbjc4n">
+			<div class="LogoWithDescription__Container-sc-1b4bm6c-0 lhglTA css-1dbjc4n">
+		
+		</div>
+			<div class="css-1dbjc4n" id="로고와 설명" data-testid="로고와 설명" style="text-align: center; align-items: center;">
+				<div class="LogoWithDescription__Text-sc-1b4bm6c-1 gXkdNe css-1563yu1" dir="auto">간편하게 로그인하고</div>
+				<div class="LogoWithDescription__Text-sc-1b4bm6c-1 cLsMZb css-1563yu1" dir="auto">다양한 서비스를 이용하세요.</div>
+			</div>
+		</div>
+	
+		
+			<div class="css-1dbjc4n" style="display: flex; flex-direction: column; -webkit-box-orient: vertical; -webkit-box-direction: normal; text-align: center; align-items: center;">
+				<form action="loginForm" method="post">
+					<table>
+						 <tr class="css-1dbjc4n r-18u37iz" style="margin-top: 30px;">
+							<td class="css-1dbjc4n r-1mlwlqe r-16y2uox r-1wbh5a2 r-kzbkwu r-qi0n3 r-c9eks5">
+								<input type="text" class="login_id" name="user_id" placeholder="아이디"  style="width:280px; height: 30px;">
+							</td>
+						 </tr>
+						 <tr class="css-1dbjc4n r-18u37iz">
+							<td class="css-1dbjc4n r-1mlwlqe r-16y2uox r-1wbh5a2 r-kzbkwu r-qi0n3 r-c9eks5" style="padding-top: 10px;">
+								<input type="password" name="user_pw" placeholder="비밀번호"  style="width:280px; height: 30px;">
+								<span class="id_login_re_1" th:if="${msg==false}">아이디와 비밀번호가 일치하지 않습니다</span>
+							</td>
+						 </tr>
+						<tr>
+							<td>
+								<div class="FixedButton__ResponsiveButton-s6ckrb-0 bVaiha">
+									<button type="submit" id="btnLogin" >로그인</button>	
+									
+									<button><a th:href="@{/user/join}">회원가입하기</a></button>
+								</div>
+								<!--
+								<th:if test="${msg == 'logout' }">
+									<div style="color:red">
+										로그아웃되었습니다.
+									</div>
+								</th
+								:if>
+								-->
+							</td>
+						 </tr>
+					 </table>
+				</form>	
+				</div>
+				<!--
+				<ul class="login_list">
+					<li class="kakao"><a th:href="@{|${kakaoUrl}|}"><strong>카카오톡</strong> 로그인</a></li>
+					<li class="naver"><a href="javascript:;"><strong>구글</strong> 로그인</a></li>
+				</ul>	
+				-->
+	</div>
+	</div>
+	
+
+	
+</section>
+</div>
+</th:block>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.project.agent.service.AdminMapper">
+
+	<select id="getUserList" resultType="UserVO">
+		select * from user
+		where user_id is not null
+		<if test="searchId != '' and searchId != null "> 
+		and user_id like concat('%', #{searchId}, '%')</if> 
+		<!-- <if test="searchNick != '' and searchNick != null "> 
+		and user_nick like concat('%', #{searchNick}, '%') </if> -->
+		
+		order by
+		user_num desc
+		limit #{pageStart}, #{amount}
+	</select>
+
+
+	<select id="getUserTotal" resultType="int">
+		select count(*) as total
+		from user
+		where user_id is not null
+		<if test="searchId != '' and searchId != null "> 
+		and user_id like concat('%', #{searchId}, '%')</if> 
+		<!-- <if test="searchNick != '' and searchNick != null "> 
+		and user_nick like concat('%', #{searchNick}, '%') </if> -->
+		
+
+	</select>
+
+	<select id="getAgentList" resultType="AgentMemberVO">
+		select * from agent_member
+		where a_email is not null
+		<if test="searchId != '' and searchId != null "> 
+		and a_email like concat('%', #{searchId}, '%')</if> 
+		<!-- <if test="searchNick != '' and searchNick != null "> 
+		and partner_nick like concat('%', #{searchNick}, '%') </if> -->
+		
+		order by
+		a_no desc
+		limit #{pageStart}, #{amount}
+	</select>
+
+
+	<select id="getAgentTotal" resultType="int">
+		select count(*) as total
+		from agent_member
+		where a_email is not null
+		<if test="searchId != '' and searchId != null "> 
+		and a_email like concat('%', #{searchId}, '%')</if> 
+		<!-- <if test="searchNick != '' and searchNick != null "> 
+		and partner_nick like concat('%', #{searchNick}, '%') </if> -->
+
+	</select>
+	<!-- null값 조회는 is null로 하기 -->
+	<select id="getAgentCheckList" resultType="AgentMemberVO">
+		select * from agent_member
+		where a_agree = 'n'
+		order by
+		a_email desc
+		limit #{pageStart}, #{amount}
+	</select>
+
+
+	<select id="getAgentCheckTotal" resultType="int">
+		select count(*) as
+		total
+		from agent_member
+		where a_agree = 'n'
+
+	</select>
+
+	<select id="getUserNotice" resultType="NoticeVO">
+		select * from notice
+		where notice_type = 'USER'
+	</select>
+
+	<select id="getAgentNotice" resultType="NoticeVO">
+		select * from notice
+		where notice_type = 'PARTNER'
+	</select>
+
+	<select id="getNoticeDetail" resultType="NoticeVO">
+		select * from notice
+		where notice_num = #{notice_num}
+	</select>
+	
+	<update id="agentUpdate" parameterType="AgentMemberVO">
+
+		update agent_member set
+		a_agree = 'y'
+		where a_no = #{a_no}
+
+	</update>
+	
+	<select id="getAgentCheckDetail" resultType="AgentMemberVO">
+		select * from agent_member
+		where a_no = #{a_no}
+	</select>
+	
+
+</mapper>

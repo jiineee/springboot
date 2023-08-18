@@ -1,0 +1,31 @@
+@charset "EUC-KR";
+body {
+	background-color:#4e73df;
+}
+
+body a{
+	background-color: #eee;
+	text-decoration: none;
+	font-size: 1.6rem;
+	padding:8px 30px 8px 30px ;
+	border-radius: 10px;
+}
+
+.login {
+	padding-top: 130px;
+	text-align:  center;
+	
+}
+
+.login h2{
+	font-size: 3rem;
+	color: #eee;
+}
+
+.login div {
+	margin:40px;
+}
+
+.userLogin a{
+	padding: 8px 44px 8px 44px;
+}

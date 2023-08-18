@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{./include/layout :: setContent( ~{:: .card}) }">
+<div class="card shadow md-4">
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="full_collum collum">
+			        <ul>
+			            <li class="collum_tit">
+			                <ul>
+								<table cellpadding="0" cellspacing="0" class="board_basic_view" width="100%;">
+									<div class="card-header py-3">등록 완료</div>
+								        <tr>
+								            <th>주소</th>
+								            <td>
+												<span>[[${vo.r_address}]]</span>
+												<span>[[${vo.r_address_detail}]]</span>
+											</td>
+								        </tr>
+								        <tr>
+								            <th>보증금 / 월세</th>
+								            <td>
+												<span>[[${vo.deposit}]] /</span>
+												<span>[[${vo.rent}]]</span>
+											</td>
+								        </tr>
+								        <tr>
+								            <th>방구조</th>
+								            <td>
+												<span>[[${vo.structure}]]</span>
+											</td>
+								        </tr>
+								        <tr>
+								            <th>방향</th>
+								            <td>
+												<span>[[${vo.direction}]]</span>
+											</td>
+								        </tr>
+								        <tr>
+								            <th>크기</th>
+								            <td>
+												<span>[[${vo.size}]]㎡ /</span>
+												<span>[[${vo.room_sqft}]]평</span>
+											</td>
+								        </tr>
+						        </table>
+						        <div class="btn_area">
+                                   <a href="roomList" class="save" id="modifyBtn">확인</a>
+                                </div>
+					        </ul>
+			            </li>
+			        </ul>
+			     </div>
+			 </div>
+    	</div>
+    </div>
+</div>
+</th:block>	
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+
+<th:block th:replace="~{./include/adminlayout :: setContent( ~{:: .card}) }">
+	<div class="card shadow md-4">
+		<!-- <div class="container"> -->
+		<div class="card-header py-3">
+			대기중인 파트너
+			<!-- <h3>게시판 리스트</h3> -->
+		</div>
+		<div class="card-body">
+
+			<body>
+
+				[[${vo.a_no}]]
+				<br>
+				[[${vo.a_email}]]
+				<br>
+				<form name="actionForm" action="#" method="post">
+					<input type="hidden" name="a_no" th:value="${vo.a_no}">
+					<input type="hidden" name="a_email" th:value="${vo.a_email}">
+					<input type="hidden" name="a_agree" th:value="${vo.a_agree}">
+					<div class="btn_area">
+						<a href="#" class="save" id="checkBtn">승인</a>
+						<a href="agentCheckList" class="revise">목록</a>
+						<a href="#" class="delete" id="deleteBtn">삭제</a>
+					</div>
+				</form>
+		</div>
+	</div>
+</th:block>
+</body>
+
+<script>
+
+	//수정기능
+	var modifyBtn = document.getElementById("checkBtn");
+	checkBtn.onclick = () => {
+		//이벤트 a에 걸려있음
+		event.preventDefault();
+		document.actionForm.action = "checkForm"; //action변경
+		document.actionForm.submit();
+
+	}
+
+	//삭제기능
+	let deleteBtn = document.getElementById("deleteBtn");
+	deleteBtn.onclick = () => {
+		event.preventDefault();
+
+		document.actionForm.action = "deleteForm";//action변경
+		document.actionForm.submit();
+	}
+
+</script>
+
+</html>

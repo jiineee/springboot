@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script th:if="${msg}">
+    alert("[[${msg}]]");
+</script>
+<th:block th:replace="~{./include/layout :: setContent( ~{:: .card}) }">
+<div class="card shadow md-4">
+<!-- <div class="container"> -->
+	<div class="card-header py-3">
+		방 등록 목록
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-12">
+				<form action="roomList" method="post">
+					<input type="hidden" name="perPageNum" value="${pageObject.perPageNum }">
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+						  <select class="form-control" id="key" name="key">
+						    <option value="t">제목</option>
+						    <option value="c">내용</option>
+						    <option value="w">작성자</option>
+						    <option value="tc">제목/내용</option>
+						    <option value="tw">제목/작성자</option>
+						    <option value="cw">내용/작성자</option>
+						    <option value="tcw">모두</option>
+						  </select>
+					  </div>
+					  <input type="text" class="form-control" placeholder="Search" id="word" name="word">
+					  <div class="input-group-append">
+					    <button class="btn btn-success" type="submit">검색</button>
+					  </div>
+					</div>
+				</form>
+				<h6 class="cnt">등록한 방 : 개</h6>
+			</div>
+		</div>
+		<form action="roomChange" method="post">
+		<table cellpadding="0" cellspacing="0" class="col_14" height="100%" width="100%;">
+			<tr>
+				<th></th>
+				<th>목록</th>
+				<th></th>
+			</tr>
+			<tr th:each="vo, status : ${list}">
+				<td height="0">
+					<div><img class="roomImg" src="" style="max-width: 100%; max-height: 100%;"></div>
+				</td>
+				<td>
+					<span name="room_id">공실번호 : [[${vo.room_id}]]</span><br/>
+					<span>[[${vo.deposit}]] /</span>
+					<span>[[${vo.rent}]]</span>
+					<h3>[[${vo.r_address}]]</h3>
+				</td>
+				<td>
+					<div class="btn_area">
+						<a href="roomUpdate" class="save" >수정</a>
+						<a href="roomDelete" class="save" >삭제</a>
+					</div>
+				</td>
+			</tr>
+									
+											
+		</table>
+		</form>
+		<!--<th:block th:replace="~{./include/page :: pageNation( ${pageVO} )}"></th:block>-->
+	
+	</div>
+</div>
+</th:block>
+<script th:inline="javascript">
+	window.onload = function () {
+		var sessionValue = "";
+		$.ajax({
+    url: 'get-session-value', // 서버의 세션 값을 가져올 URL
+    type: 'GET',
+    success: function(data) {
+		//console.log(data.a_name)
+        sessionValue = data.a_name;
+        sessionStorage.setItem('sessionValue', sessionValue); // 세션 스토리지에 저장
+        //console.log(sessionStorage.getItem('sessionValue')); // 클라이언트 측에서 세션 값을 사용
+    }
+});
+		
+		$.ajax({
+			url: "getAjaxImg",
+			type: "post",
+			contentType: "application/json", //보낼 데이터 형식
+			data : JSON.stringify( {room_writer: sessionValue} ),
+			success : function(data) {
+				console.log(sessionValue);
+				console.log(data);
+				
+				
+				var imgElements = $(".roomImg"); // 모든 이미지 요소들을 선택
+
+	            for(var i = 0; i < data.length && i < imgElements.length; i++) {
+	                var imgElement = imgElements[i];
+	                var imgSrc = "./display?filename=" + data[i].filename + "&filepath=" + data[i].filepath + "&uuid=" + data[i].uuid;
+	                $(imgElement).attr("src", imgSrc);
+	            }
+				
+				$(".cnt").html("등록한 방 : " + data.length + "개");
+				
+                
+			},
+			error : function(status, error) {
+				console.log(status)
+			}
+			
+		})
+		
+	}
+</script>
+</html>

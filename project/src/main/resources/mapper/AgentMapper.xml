@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.example.project.agent.service.AgentMapper">
+  
+  <select id="agentLogin" resultType="AgentMemberVO">
+		select *
+		from agent_member
+		where a_email = #{a_email} and a_pw = #{a_pw} and a_agree = 'Y'
+  </select>
+  
+  <insert id="agentRegist" parameterType="AgentMemberVO">
+  	insert into agent_member(agent,
+						     a_name,
+		                     a_phone,
+		                     a_email,
+		                     a_pw)
+	values(#{agent},
+		   #{a_name},
+           #{a_phone},
+           #{a_email},
+           #{a_pw})
+  </insert>
+  
+  <insert id="roomRegist" parameterType="RoomVO">
+  insert into room(room_writer,
+  				   room_enddate,
+  				   deposit,
+  				   rent,
+				   structure,
+				   maintenanceCost,
+				   size,
+				   room_sqft,
+				   room_floors,
+				   room_floor,
+				   direction,
+				   room_opt,
+				   loan,
+				   pet,
+				   parking,
+				   elevator,
+				   moveDate,
+				   title,
+				   content,
+				   message,
+  				   r_address,
+  				   r_address_detail)
+  values(#{room_writer},
+  		 #{room_enddate},
+		 #{deposit},
+		 #{rent},
+		 #{structure},
+		 #{maintenanceCost},
+		 #{size},
+		 #{room_sqft},
+		 #{room_floors},
+		 #{room_floor},
+		 #{direction},
+		 #{room_opt},
+		 #{loan},
+		 #{pet},
+		 #{parking},
+		 #{elevator},
+		 #{moveDate},
+		 #{title},
+		 #{content},
+		 #{message},
+  		 #{r_address},
+  		 #{r_address_detail})
+  </insert>
+  
+  
+  <insert id="roomFileRegist">
+  	
+  		<selectKey order="BEFORE" keyProperty="room_id" resultType="int">
+  			select max(room_id) as room_id from room where room_writer = #{room_writer}
+  		</selectKey>
+  	
+  		insert into photo(filename,
+						  filepath,
+						  uuid,
+						  room_id,
+						  room_writer)
+  		values(#{filename},
+  			   #{filepath},
+  			   #{uuid},
+  			   #{room_id},
+  			   #{room_writer})
+  </insert>
+  
+  <!-- <select id="getList" resultType="RoomVO">
+		select *
+		from room
+		where room_writer = #{writer}
+  </select> -->
+  <select id="getList" resultType="RoomVO">
+  SELECT r.*, p.*
+FROM room r
+JOIN (
+    SELECT p1.*
+    FROM photo p1
+    JOIN (
+        SELECT ROOM_ID, MIN(UPLOAD_NO) AS min_upload_no
+        FROM photo
+        GROUP BY ROOM_ID
+    ) min_photos
+    ON p1.ROOM_ID = min_photos.ROOM_ID AND p1.UPLOAD_NO = min_photos.min_upload_no
+) p ON r.room_id = p.ROOM_ID
+where r.room_writer = #{a_name} and r.r_agree = 'Y'
+  </select>
+ <!--  <select id="getTotal" resultType="int">
+  		select count(*) as total
+  		from room
+  		where room_writer = #{writer}
+  	</select> -->
+  
+  <select id="getRoomData" resultType="RoomVO">
+  	select *
+  	from room
+  	where room_id = #{room_id}
+  </select>
+  
+  <update id="roomUpdate" parameterType="RoomVO">
+  	update room set ROOM_WRITER = #{room_writer},
+	ROOM_ENDDATE = #{room_enddate},
+    DEPOSIT = #{deposit},
+    RENT = #{rent},
+    STRUCTURE = #{structure},
+    MAINTENANCECOST = #{maintenanceCost},
+    SIZE = #{size},
+    ROOM_SQFT = #{room_sqft},
+    ROOM_FLOORS = #{room_floors},
+    ROOM_FLOOR = #{room_floor},
+    DIRECTION = #{direction},
+    ROOM_OPT = #{room_opt},
+    LOAN = #{loan},
+    PET = #{pet},
+    PARKING = #{parking},
+    ELEVATOR = #{elevator},
+    MOVEDATE = #{moveDate},
+    TITLE = #{title},
+    CONTENT = #{content},
+    MESSAGE = #{message},
+    R_ADDRESS = #{r_address},
+    R_ADDRESS_DETAIL = #{r_address_detail}
+    where ROOM_WRITER = #{room_writer} and R_ADDRESS = #{r_address} and r_address_detail = #{r_address_detail}
+  </update>
+
+  
+  <select id="getOk" resultType="RoomVO">
+  	select * 
+  	from room
+  	where room_id = (select max(room_id) as room_id from room where room_writer = #{room_writer})
+  	
+  </select>
+  
+  <select id="getAjaxImg" resultType="PhotoVO">
+  		SELECT r.*, p.*
+FROM room r
+JOIN (
+    SELECT p1.*
+    FROM photo p1
+    JOIN (
+        SELECT ROOM_ID, MIN(UPLOAD_NO) AS min_upload_no
+        FROM photo
+        GROUP BY ROOM_ID
+    ) min_photos
+    ON p1.ROOM_ID = min_photos.ROOM_ID AND p1.UPLOAD_NO = min_photos.min_upload_no
+) p ON r.room_id = p.ROOM_ID
+where r.room_writer = #{writer} and r.r_agree = 'Y'
+  	</select>
+  	
+  	<select id="getAjaxUpdateImg" resultType="PhotoVO">
+  		select * from photo where room_id = #{room_id}
+  	</select>
+  
+  <select id="roomDelete">
+  	delete from agent_member where room_id = #{room_id}
+  </select>
+  </mapper>

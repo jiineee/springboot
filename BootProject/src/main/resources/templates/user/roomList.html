@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{./include/layout :: setContent( ~{:: .card}) }">
+<div class="card shadow md-4">
+<!-- <div class="container"> -->
+	<div class="card-header py-3">
+		게시판 리스트
+<!-- 		<h3>게시판 리스트</h3> -->
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-md-12">
+				<form action="list.do" method="post">
+					<input type="hidden" name="perPageNum" value="${pageObject.perPageNum }">
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+						  <select class="form-control" id="key" name="key">
+						    <option value="t">제목</option>
+						    <option value="c">내용</option>
+						    <option value="w">작성자</option>
+						    <option value="tc">제목/내용</option>
+						    <option value="tw">제목/작성자</option>
+						    <option value="cw">내용/작성자</option>
+						    <option value="tcw">모두</option>
+						  </select>
+					  </div>
+					  <input type="text" class="form-control" placeholder="Search" id="word" name="word">
+					  <div class="input-group-append">
+					    <button class="btn btn-success" type="submit">검색</button>
+					  </div>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+					<tr th:each="vo : ${list}" class="dataRow"> 
+						<td class="no">[[${vo.no }]]</td>
+						<td>[[${vo.title }]]</td>
+						<td>[[${vo.writer }]]</td>
+						<!--<td><fmt:formatDate value="${vo.writeDate }" pattern="yyyy-MM-dd"/></td>-->
+						<td>[[${ #temporals.format(vo.writeDate, 'yyyy-MM-dd')   }]]</td>
+						<td>[[${vo.hit }]]</td>
+					</tr>
+				
+			</tbody>
+		</table>
+		<!--<a href="write.do" class="btn btn-default">글쓰기</a>-->
+		<!--<th:block th:replace="~{./include/page :: pageNation( ${pageVO} )}"></th:block>-->
+	
+	</div>
+</div>
+</th:block>
+</html>

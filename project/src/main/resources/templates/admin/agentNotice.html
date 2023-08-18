@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+
+
+<th:block th:replace="~{./include/adminlayout :: setContent( ~{:: .card}) }">
+	<div class="card shadow md-4">
+		<!-- <div class="container"> -->
+		<div class="card-header py-3">
+			파트너공지
+			<!-- 		<h3>게시판 리스트</h3> -->
+		</div>
+		<div class="card-body">
+	<form name="noticeForm" action="noticeForm" method="post">
+			<table cellpadding="0" cellspacing="0" class="col_14" width="100%;">
+				<colgroup span="3" width="10%">
+  				<colgroup width="50%">
+ 				<colgroup width="20%">
+				<tr>
+					<th>순서</th>
+					<th>글번호</th>
+					<th>글쓴이</th>
+					<th>제목</th>
+					<th>작성일</th>
+
+				</tr>
+
+				<tr th:each="vo, status : ${list}">
+
+					<td>[[${status.count}]]</td>
+					<td>[[${vo.notice_num}]]</td>
+					<td>[[${vo.notice_id}]]</td>
+					<td>
+						<a title="상세정보" th:href="@{noticeDetail(notice_num=${vo.notice_num})}">
+							[[${vo.notice_title}]]
+						</a>
+					</td>
+
+					<td>[[${ #temporals.format(vo.notice_regdate, 'yy년MM월dd일 hh시mm분ss초' ) }]]</td>
+
+				</tr>
+				
+			</table>
+			
+			</form>
+		</div>
+	</div>
+</th:block>
+</html>

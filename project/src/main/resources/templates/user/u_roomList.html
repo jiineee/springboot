@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{./include/userlayout :: setContent( ~{:: .card}) }">
+
+<div class="card shadow md-4" style="width: 960px">
+	
+		<div class="card-body">
+		<div class="row">
+			<div class="col-md-12">
+				<form action="roomList" method="post">
+					<input type="hidden" name="perPageNum" value="${pageObject.perPageNum }">
+					<div class="input-group mb-3">
+					  <div class="input-group-prepend">
+						  <select class="form-control" id="key" name="key">
+						    <option value="t">전체</option>
+						  </select>
+					  </div>
+					  <input type="text" class="form-control" placeholder="Search" id="word" name="word">
+					  <div class="input-group-append">
+					    <button class="btn btn-success" type="submit">검색</button>
+					  </div>
+					</div>
+				</form>
+			
+			</div>
+		</div>
+	
+	
+	
+	
+	
+		<table cellpadding="0" cellspacing="0" class="col_14" height="100%" width="100%;">
+				<tr>
+					<th></th>
+					<th>목록</th>
+					<th></th>
+				</tr>
+				<tr th:each="vo, status : ${list}">
+					<td height="0">
+						<a th:href="@{/user/roomDetail}"><img class="roomImg" src="../img/slide4.jpg" style="width: 300px; max-height: 400px; padding-right: 50px;"></a>
+					</td>
+					<td style="display: flex; margin-top: 60px; padding-bottom: 130px;">
+						<input type="hidden" id="r_writer" th:value="${vo.room_writer}">
+						<span style="margin-right: 50px;">공실번호 : [[${vo.room_id}]]</span><br/>
+						<span>[[${vo.deposit}]] /</span>
+						<span style="margin-right: 50px;">[[${vo.rent}]]</span>
+						<h3>[[${vo.r_address}]]</h3>
+					</td>
+				</tr>
+																		
+		</table>
+
+</div>
+</th:block>
+
+
+<script th:inline="javascript">
+	
+
+	
+	window.onload = function () {
+	
+		$.ajax({
+			url: "getAjaxImg",
+			type: "post",
+			contentType: "application/json", //보낼 데이터 형식
+			data : JSON.stringify( {room_writer: writer} ),
+			success : function(data) {
+				console.log(data);
+				
+				
+				var imgElements = $(".roomImg"); // 모든 이미지 요소들을 선택
+
+	            for(var i = 0; i < data.length && i < imgElements.length; i++) {
+	                var imgElement = imgElements[i];
+	                var imgSrc = "display?filename=" + data[i].filename + "&filepath=" + data[i].filepath + "&uuid=" + data[i].uuid;
+	                $(imgElement).attr("src", imgSrc);
+	            }
+				
+				$(".cnt").html("등록한 방 : " + data.length + "개");
+				
+                
+			},
+			error : function(status, error) {
+				console.log(status)
+			}
+			
+		})
+		
+	}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
